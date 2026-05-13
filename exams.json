@@ -1,0 +1,96 @@
+[
+  {
+    "id": "arke-2027-june-calculus",
+    "name": "아르케 2027학년도 6월 모의고사 - 미적분",
+    "description": "2027학년도 6월 모의고사 미적분 선택자 기준 예상 계산 데이터입니다.",
+    "subject": "수학",
+    "commonMax": 74,
+    "electiveMax": 26,
+    "electiveName": "미적분",
+    "formula": {
+      "a": 0.783,
+      "b": 0.802,
+      "c": 63.7,
+      "display": "S ≈ 0.783X + 0.802Y + 63.7"
+    },
+    "cutoffs": {
+      "1": 130,
+      "2": 123,
+      "3": 116
+    },
+    "percentileTable": [
+      { "standardScore": 142, "percentile": 100 },
+      { "standardScore": 139, "percentile": 100 },
+      { "standardScore": 137, "percentile": 99 },
+      { "standardScore": 136, "percentile": 99 },
+      { "standardScore": 134, "percentile": 98 },
+      { "standardScore": 133, "percentile": 98 },
+      { "standardScore": 131, "percentile": 97 },
+      { "standardScore": 130, "percentile": 96 },
+      { "standardScore": 128, "percentile": 95 },
+      { "standardScore": 126, "percentile": 94 },
+      { "standardScore": 124, "percentile": 92 },
+      { "standardScore": 122, "percentile": 90 }
+    ],
+    "links": [
+      {
+        "label": "총평 PDF",
+        "url": "https://example.com/review.pdf",
+        "type": "pdf"
+      },
+      {
+        "label": "해설 영상",
+        "url": "https://youtube.com/watch?v=example",
+        "type": "video"
+      },
+      {
+        "label": "문제지 및 정답",
+        "url": "https://example.com/problems.pdf",
+        "type": "answer"
+      }
+    ],
+    "notices": [
+      "본 표준점수 환산식은 실제값이 아닌 가상의 예측입니다.",
+      "예상 등급컷은 응시 현황에 따라 수정될 수 있습니다."
+    ]
+  },
+  {
+    "id": "sample-test",
+    "name": "예시 모의고사 - 미적분",
+    "description": "사이트 테스트용 예시 데이터입니다.",
+    "subject": "수학",
+    "commonMax": 74,
+    "electiveMax": 26,
+    "electiveName": "미적분",
+    "formula": {
+      "a": 1.0,
+      "b": 1.2,
+      "c": 25,
+      "display": "S = 1.0X + 1.2Y + 25"
+    },
+    "cutoffs": {
+      "1": 132,
+      "2": 125,
+      "3": 117
+    },
+    "percentileTable": [
+      { "standardScore": 140, "percentile": 100 },
+      { "standardScore": 137, "percentile": 99 },
+      { "standardScore": 134, "percentile": 98 },
+      { "standardScore": 131, "percentile": 96 },
+      { "standardScore": 128, "percentile": 94 },
+      { "standardScore": 125, "percentile": 92 },
+      { "standardScore": 123, "percentile": 90 }
+    ],
+    "links": [
+      {
+        "label": "예시 총평",
+        "url": "https://example.com/sample-review.pdf",
+        "type": "pdf"
+      }
+    ],
+    "notices": [
+      "이 데이터는 예시입니다."
+    ]
+  }
+]

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>모의고사 예상 표준점수·등급 계산기</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <p class="eyebrow">수학 선택과목 예상 계산</p>
+      <h1>모의고사 예상 표준점수·등급 계산기</h1>
+    </section>
+
+    <section class="card calculator-card" aria-labelledby="calculator-title">
+      <div class="card-header">
+        <div>
+          <h2 id="calculator-title">점수 입력</h2>
+          <p>시험 데이터를 선택하고 공통 점수와 선택과목 점수를 입력하세요.</p>
+        </div>
+      </div>
+
+      <form id="score-form" novalidate>
+        <label class="field">
+          <span>시험 선택</span>
+          <select id="exam-select" disabled>
+            <option value="">시험 데이터를 불러오는 중입니다</option>
+          </select>
+        </label>
+
+        <div class="input-grid">
+          <label class="field">
+            <span>공통 점수</span>
+            <input id="common-score" type="number" min="0" step="1" inputmode="numeric" placeholder="예: 62">
+          </label>
+
+          <label class="field">
+            <span id="elective-score-label">선택과목 점수</span>
+            <input id="elective-score" type="number" min="0" step="1" inputmode="numeric" placeholder="예: 21">
+          </label>
+        </div>
+
+        <button class="primary-button" type="submit">계산하기</button>
+      </form>
+
+      <p id="message" class="message" role="alert" aria-live="polite"></p>
+    </section>
+
+    <section id="result-card" class="card result-card hidden" aria-live="polite">
+      <div class="result-heading">
+        <div>
+          <p class="eyebrow">계산 결과</p>
+          <h2 id="result-exam-name"></h2>
+        </div>
+        <div class="grade-badge" id="result-grade"></div>
+      </div>
+
+      <div class="result-grid">
+        <div class="result-item">
+          <span>원점수</span>
+          <strong id="result-raw-score"></strong>
+        </div>
+        <div class="result-item">
+          <span>예상 표준점수</span>
+          <strong id="result-standard-score"></strong>
+        </div>
+        <div class="result-item">
+          <span>예상 백분위</span>
+          <strong id="result-percentile"></strong>
+        </div>
+        <div class="result-item">
+          <span>예상 등급</span>
+          <strong id="result-grade-text"></strong>
+        </div>
+      </div>
+
+      <div class="cutoff-panel">
+        <h3>1~3등급컷</h3>
+        <div id="result-cutoffs" class="cutoff-table"></div>
+      </div>
+    </section>
+
+    <section id="exam-info" class="card info-card hidden" aria-live="polite"></section>
+
+    <footer class="footer">
+      <p>본 계산기는 사전 공개된 예상 변환식과 예상 등급컷을 바탕으로 한 비공식 계산기입니다. 실제 결과와 차이가 있을 수 있습니다.</p>
+      <p>예상 백분위는 입력된 표준점수-백분위 대응표를 바탕으로 선형보간하여 계산한 값입니다. 실제 백분위와 차이가 있을 수 있습니다.</p>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
