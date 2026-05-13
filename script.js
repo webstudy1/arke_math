@@ -14,8 +14,14 @@ const resultPercentile = document.getElementById("result-percentile");
 const resultGrade = document.getElementById("result-grade");
 const resultGradeText = document.getElementById("result-grade-text");
 const resultCutoffs = document.getElementById("result-cutoffs");
+const historyEmpty = document.getElementById("history-empty");
+const historyContent = document.getElementById("history-content");
+const historyChart = document.getElementById("history-chart");
+const historyList = document.getElementById("history-list");
+const clearHistoryButton = document.getElementById("clear-history");
 
 let exams = [];
+const historyStorageKey = "arkeScoreHistory";
 
 const linkTypeLabels = {
   pdf: "PDF",
@@ -27,9 +33,16 @@ const linkTypeLabels = {
   other: "링크"
 };
 
-document.addEventListener("DOMContentLoaded", loadExams);
+document.addEventListener("DOMContentLoaded", init);
 scoreForm.addEventListener("submit", handleSubmit);
 examSelect.addEventListener("change", handleExamChange);
+clearHistoryButton.addEventListener("click", clearHistory);
+window.addEventListener("resize", renderHistory);
+
+function init() {
+  loadExams();
+  renderHistory();
+}
 
 function setMessage(text) {
   messageEl.textContent = text || "";
@@ -164,7 +177,8 @@ function handleSubmit(event) {
 
   const rawScore = commonScore + electiveScore;
   const standardScore = calculateStandardScore(commonScore, electiveScore, exam);
-  const percentile = interpolatePercentile(standardScore, exam.percentileTable);
+  const zeroRawStandardScore = calculateStandardScore(0, 0, exam);
+  const percentile = interpolatePercentile(standardScore, exam.percentileTable, zeroRawStandardScore);
   const grade = getGrade(standardScore, exam.cutoffs);
 
   renderResult({
@@ -172,7 +186,9 @@ function handleSubmit(event) {
     rawScore,
     standardScore,
     percentile,
-    grade
+    grade,
+    commonScore,
+    electiveScore
   });
 }
 
@@ -253,7 +269,7 @@ function getGrade(standardScore, cutoffs) {
   return "3등급 미만";
 }
 
-function interpolatePercentile(standardScore, percentileTable) {
+function interpolatePercentile(standardScore, percentileTable, zeroRawStandardScore = 0) {
   const sortedTable = percentileTable
     .map((row) => ({
       standardScore: Number(row.standardScore),
@@ -275,11 +291,18 @@ function interpolatePercentile(standardScore, percentileTable) {
   }
 
   if (standardScore < lowest.standardScore) {
-    if (lowest.standardScore <= 0) {
-      return clampPercentile(lowest.percentile);
+    const baselineScore = Number(zeroRawStandardScore);
+
+    if (!Number.isFinite(baselineScore) || baselineScore >= lowest.standardScore) {
+      return standardScore <= lowest.standardScore ? 0 : clampPercentile(lowest.percentile);
     }
 
-    const lowEstimate = (standardScore / lowest.standardScore) * lowest.percentile;
+    if (standardScore <= baselineScore) {
+      return 0;
+    }
+
+    const lowRatio = (standardScore - baselineScore) / (lowest.standardScore - baselineScore);
+    const lowEstimate = lowRatio * lowest.percentile;
     return clampPercentile(lowEstimate);
   }
 
@@ -310,6 +333,239 @@ function renderResult(result) {
   resultGradeText.textContent = result.grade;
   resultCutoffs.innerHTML = renderCutoffs(result.exam.cutoffs);
   resultCard.classList.remove("hidden");
+  saveHistory(result);
+  renderHistory();
+}
+
+function getHistory() {
+  try {
+    const savedHistory = JSON.parse(localStorage.getItem(historyStorageKey) || "[]");
+
+    if (!Array.isArray(savedHistory)) {
+      return [];
+    }
+
+    return savedHistory.filter((item) => (
+      item &&
+      Number.isFinite(Number(item.standardScore)) &&
+      Number.isFinite(Number(item.rawScore)) &&
+      item.examName &&
+      item.createdAt
+    ));
+  } catch (error) {
+    return [];
+  }
+}
+
+function saveHistory(result) {
+  const history = getHistory();
+  const nextItem = {
+    id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
+    createdAt: new Date().toISOString(),
+    examId: result.exam.id,
+    examName: result.exam.name,
+    electiveName: result.exam.electiveName,
+    commonScore: result.commonScore,
+    electiveScore: result.electiveScore,
+    rawScore: result.rawScore,
+    standardScore: result.standardScore,
+    percentile: Number(result.percentile.toFixed(1)),
+    grade: result.grade
+  };
+
+  const nextHistory = [...history, nextItem].slice(-50);
+  try {
+    localStorage.setItem(historyStorageKey, JSON.stringify(nextHistory));
+  } catch (error) {
+    setMessage("브라우저 사이트 데이터 저장이 제한되어 기록을 저장하지 못했습니다.");
+  }
+}
+
+function clearHistory() {
+  try {
+    localStorage.removeItem(historyStorageKey);
+  } catch (error) {
+    setMessage("브라우저 사이트 데이터에 접근할 수 없어 기록을 지우지 못했습니다.");
+  }
+
+  renderHistory();
+}
+
+function renderHistory() {
+  const history = getHistory();
+
+  if (history.length === 0) {
+    historyEmpty.classList.remove("hidden");
+    historyContent.classList.add("hidden");
+    historyList.innerHTML = "";
+    clearHistoryButton.disabled = true;
+    clearChart();
+    return;
+  }
+
+  historyEmpty.classList.add("hidden");
+  historyContent.classList.remove("hidden");
+  clearHistoryButton.disabled = false;
+  drawHistoryChart(history);
+  renderHistoryList(history);
+}
+
+function drawHistoryChart(history) {
+  const context = historyChart.getContext("2d");
+  const ratio = window.devicePixelRatio || 1;
+  const displayWidth = Math.max(historyChart.parentElement.clientWidth, 520);
+  const displayHeight = 280;
+
+  historyChart.width = displayWidth * ratio;
+  historyChart.height = displayHeight * ratio;
+  historyChart.style.width = `${displayWidth}px`;
+  historyChart.style.height = `${displayHeight}px`;
+  context.setTransform(ratio, 0, 0, ratio, 0, 0);
+  context.clearRect(0, 0, displayWidth, displayHeight);
+
+  const padding = {
+    top: 24,
+    right: 22,
+    bottom: 42,
+    left: 44
+  };
+  const chartWidth = displayWidth - padding.left - padding.right;
+  const chartHeight = displayHeight - padding.top - padding.bottom;
+  const scores = history.map((item) => Number(item.standardScore));
+  const minScore = Math.min(...scores);
+  const maxScore = Math.max(...scores);
+  const scoreRange = Math.max(1, maxScore - minScore);
+  const yMin = Math.max(0, minScore - Math.ceil(scoreRange * 0.18));
+  const yMax = maxScore + Math.ceil(scoreRange * 0.18);
+  const yRange = Math.max(1, yMax - yMin);
+
+  context.strokeStyle = "#d9e0ea";
+  context.lineWidth = 1;
+  context.beginPath();
+  context.moveTo(padding.left, padding.top);
+  context.lineTo(padding.left, padding.top + chartHeight);
+  context.lineTo(padding.left + chartWidth, padding.top + chartHeight);
+  context.stroke();
+
+  context.fillStyle = "#667085";
+  context.font = "12px sans-serif";
+  context.textAlign = "right";
+  context.textBaseline = "middle";
+
+  for (let index = 0; index <= 4; index += 1) {
+    const tickValue = yMin + (yRange / 4) * index;
+    const y = padding.top + chartHeight - ((tickValue - yMin) / yRange) * chartHeight;
+
+    context.strokeStyle = "#edf1f6";
+    context.beginPath();
+    context.moveTo(padding.left, y);
+    context.lineTo(padding.left + chartWidth, y);
+    context.stroke();
+    context.fillText(Math.round(tickValue), padding.left - 8, y);
+  }
+
+  const getX = (index) => {
+    if (history.length === 1) {
+      return padding.left + chartWidth / 2;
+    }
+
+    return padding.left + (chartWidth / (history.length - 1)) * index;
+  };
+  const getY = (score) => padding.top + chartHeight - ((score - yMin) / yRange) * chartHeight;
+
+  context.strokeStyle = "#2563eb";
+  context.lineWidth = 3;
+  context.beginPath();
+
+  history.forEach((item, index) => {
+    const x = getX(index);
+    const y = getY(Number(item.standardScore));
+
+    if (index === 0) {
+      context.moveTo(x, y);
+    } else {
+      context.lineTo(x, y);
+    }
+  });
+
+  context.stroke();
+
+  history.forEach((item, index) => {
+    const x = getX(index);
+    const y = getY(Number(item.standardScore));
+    const previous = history[index - 1];
+    const diff = previous ? Number(item.standardScore) - Number(previous.standardScore) : 0;
+
+    context.fillStyle = diff >= 0 ? "#16a34a" : "#dc2626";
+    context.beginPath();
+    context.arc(x, y, 5, 0, Math.PI * 2);
+    context.fill();
+
+    context.fillStyle = "#172033";
+    context.font = "12px sans-serif";
+    context.textAlign = "center";
+    context.textBaseline = "bottom";
+    context.fillText(String(item.standardScore), x, y - 9);
+  });
+
+  context.fillStyle = "#667085";
+  context.font = "12px sans-serif";
+  context.textAlign = "center";
+  context.textBaseline = "top";
+  context.fillText("계산 순서", padding.left + chartWidth / 2, displayHeight - 24);
+}
+
+function clearChart() {
+  const context = historyChart.getContext("2d");
+  context.clearRect(0, 0, historyChart.width, historyChart.height);
+}
+
+function renderHistoryList(history) {
+  const latestFirst = [...history].reverse();
+
+  historyList.innerHTML = latestFirst.map((item, index) => {
+    const previous = history[history.length - 2 - index];
+    const diff = previous ? Number(item.standardScore) - Number(previous.standardScore) : 0;
+    const diffText = previous ? formatDiff(diff) : "첫 기록";
+    const diffClass = diff > 0 ? "up" : diff < 0 ? "down" : "same";
+
+    return `
+      <article class="history-item">
+        <div>
+          <strong>${escapeHtml(item.examName)}</strong>
+          <p>${formatDateTime(item.createdAt)} · 원점수 ${formatNumber(item.rawScore)}점 · 표준점수 ${item.standardScore}점 · 백분위 ${Number(item.percentile).toFixed(1)} · ${escapeHtml(item.grade)}</p>
+        </div>
+        <span class="diff-badge ${diffClass}">${diffText}</span>
+      </article>
+    `;
+  }).join("");
+}
+
+function formatDiff(value) {
+  if (value > 0) {
+    return `+${value}점`;
+  }
+
+  if (value < 0) {
+    return `${value}점`;
+  }
+
+  return "0점";
+}
+
+function formatDateTime(value) {
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return "-";
+  }
+
+  return new Intl.DateTimeFormat("ko-KR", {
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit"
+  }).format(date);
 }
 
 function renderExamInfo(exam) {

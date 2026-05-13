@@ -81,6 +81,26 @@
       </div>
     </section>
 
+    <section id="history-card" class="card history-card">
+      <div class="card-header history-header">
+        <div>
+          <p class="eyebrow">기록</p>
+          <h2>내 점수 기록</h2>
+          <p>계산한 결과는 이 브라우저의 기기 내 사이트 데이터에 저장됩니다.</p>
+        </div>
+        <button id="clear-history" class="secondary-button" type="button">기록 지우기</button>
+      </div>
+
+      <div id="history-empty" class="empty-state">아직 저장된 점수 기록이 없습니다.</div>
+
+      <div id="history-content" class="hidden">
+        <div class="chart-wrap">
+          <canvas id="history-chart" width="840" height="280" aria-label="표준점수 등락폭 그래프"></canvas>
+        </div>
+        <div id="history-list" class="history-list" aria-label="저장된 점수 기록"></div>
+      </div>
+    </section>
+
     <section id="exam-info" class="card info-card hidden" aria-live="polite"></section>
 
     <footer class="footer">
