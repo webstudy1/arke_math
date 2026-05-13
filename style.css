@@ -347,6 +347,29 @@ h3 {
   color: #475467;
 }
 
+.history-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+}
+
+.delete-history-button {
+  min-height: 34px;
+  border: 1px solid #fecaca;
+  border-radius: 999px;
+  background: #fff;
+  color: #b91c1c;
+  cursor: pointer;
+  padding: 6px 10px;
+  font-size: 0.86rem;
+  font-weight: 900;
+}
+
+.delete-history-button:hover {
+  background: #fee2e2;
+}
+
 .info-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -386,6 +409,15 @@ h3 {
   margin-top: 8px;
 }
 
+.top-links-card {
+  border-color: #bfdbfe;
+  background: #f8fbff;
+}
+
+.top-links-card .links {
+  gap: 12px;
+}
+
 .link-chip {
   display: inline-flex;
   align-items: center;
@@ -403,6 +435,16 @@ h3 {
 .link-chip:hover {
   border-color: var(--primary);
   background: #dbeafe;
+}
+
+.link-chip-prominent {
+  min-height: 48px;
+  border-color: #93c5fd;
+  border-radius: 8px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  padding: 10px 16px;
+  font-size: 1rem;
 }
 
 .link-type {
@@ -457,11 +499,26 @@ h3 {
     flex-direction: column;
   }
 
+  .top-links-card .links {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .link-chip-prominent {
+    justify-content: center;
+    width: 100%;
+  }
+
   .secondary-button {
     width: 100%;
   }
 
-  .diff-badge {
+  .history-actions {
+    width: 100%;
+  }
+
+  .diff-badge,
+  .delete-history-button {
     width: 100%;
   }
 

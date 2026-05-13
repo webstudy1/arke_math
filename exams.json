@@ -35,17 +35,17 @@
     "links": [
       {
         "label": "총평 PDF",
-        "url": "https://example.com/review.pdf",
+        "url": "https://drive.google.com/file/d/10oC1OWsaYFRc19-bHze9jhSeStH214wR/view?usp=drivesdk",
         "type": "pdf"
       },
       {
         "label": "해설 영상",
-        "url": "https://youtube.com/watch?v=example",
+        "url": "https://www.youtube.com/watch?v=-w-wYc9d5j8&",
         "type": "video"
       },
       {
-        "label": "문제지 및 정답",
-        "url": "https://example.com/problems.pdf",
+        "label": "문제지 및 정답지",
+        "url": "https://drive.google.com/file/d/1FaLWCparUYl4NTsyU5Po_q1o6AkL0Wc0/view?usp=drivesdk",
         "type": "answer"
       }
     ],

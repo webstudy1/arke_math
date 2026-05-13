@@ -6,6 +6,8 @@ const electiveScoreLabel = document.getElementById("elective-score-label");
 const messageEl = document.getElementById("message");
 const examInfoEl = document.getElementById("exam-info");
 const resultCard = document.getElementById("result-card");
+const topLinksCard = document.getElementById("top-links-card");
+const topLinksEl = document.getElementById("top-links");
 
 const resultExamName = document.getElementById("result-exam-name");
 const resultRawScore = document.getElementById("result-raw-score");
@@ -37,6 +39,7 @@ document.addEventListener("DOMContentLoaded", init);
 scoreForm.addEventListener("submit", handleSubmit);
 examSelect.addEventListener("change", handleExamChange);
 clearHistoryButton.addEventListener("click", clearHistory);
+historyList.addEventListener("click", handleHistoryClick);
 window.addEventListener("resize", renderHistory);
 
 function init() {
@@ -104,6 +107,7 @@ function handleExamChange() {
 
   if (!exam) {
     examInfoEl.classList.add("hidden");
+    topLinksCard.classList.add("hidden");
     electiveScoreLabel.textContent = "선택과목 점수";
     return;
   }
@@ -113,6 +117,7 @@ function handleExamChange() {
   electiveScoreInput.placeholder = `0~${exam.electiveMax}`;
   commonScoreInput.max = exam.commonMax;
   electiveScoreInput.max = exam.electiveMax;
+  renderTopLinks(exam.links);
   renderExamInfo(exam);
 }
 
@@ -391,6 +396,28 @@ function clearHistory() {
   renderHistory();
 }
 
+function deleteHistoryItem(id) {
+  const nextHistory = getHistory().filter((item) => item.id !== id);
+
+  try {
+    localStorage.setItem(historyStorageKey, JSON.stringify(nextHistory));
+  } catch (error) {
+    setMessage("브라우저 사이트 데이터에 접근할 수 없어 기록을 지우지 못했습니다.");
+  }
+
+  renderHistory();
+}
+
+function handleHistoryClick(event) {
+  const deleteButton = event.target.closest("[data-delete-history]");
+
+  if (!deleteButton) {
+    return;
+  }
+
+  deleteHistoryItem(deleteButton.dataset.deleteHistory);
+}
+
 function renderHistory() {
   const history = getHistory();
 
@@ -535,7 +562,10 @@ function renderHistoryList(history) {
           <strong>${escapeHtml(item.examName)}</strong>
           <p>${formatDateTime(item.createdAt)} · 원점수 ${formatNumber(item.rawScore)}점 · 표준점수 ${item.standardScore}점 · 백분위 ${Number(item.percentile).toFixed(1)} · ${escapeHtml(item.grade)}</p>
         </div>
-        <span class="diff-badge ${diffClass}">${diffText}</span>
+        <div class="history-actions">
+          <span class="diff-badge ${diffClass}">${diffText}</span>
+          <button class="delete-history-button" type="button" data-delete-history="${escapeAttribute(item.id)}">삭제</button>
+        </div>
       </article>
     `;
   }).join("");
@@ -620,14 +650,17 @@ function renderExamInfo(exam) {
     <h3>시험별 안내</h3>
     ${notices}
 
-    <h3>관련 자료</h3>
-    ${renderLinks(exam.links)}
   `;
 
   examInfoEl.classList.remove("hidden");
 }
 
-function renderLinks(links) {
+function renderTopLinks(links) {
+  topLinksEl.innerHTML = renderLinks(links, true);
+  topLinksCard.classList.remove("hidden");
+}
+
+function renderLinks(links, prominent = false) {
   if (!Array.isArray(links) || links.length === 0) {
     return '<p class="info-muted">등록된 관련 자료가 없습니다.</p>';
   }
@@ -636,9 +669,10 @@ function renderLinks(links) {
     .filter((link) => link && link.label && link.url)
     .map((link) => {
       const typeLabel = linkTypeLabels[link.type] || linkTypeLabels.other;
+      const className = prominent ? "link-chip link-chip-prominent" : "link-chip";
 
       return `
-        <a class="link-chip" href="${escapeAttribute(link.url)}" target="_blank" rel="noopener noreferrer">
+        <a class="${className}" href="${escapeAttribute(link.url)}" target="_blank" rel="noopener noreferrer">
           <span class="link-type">${escapeHtml(typeLabel)}</span>
           ${escapeHtml(link.label)}
         </a>
