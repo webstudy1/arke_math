@@ -35,12 +35,12 @@
     "links": [
       {
         "label": "총평 PDF",
-        "url": "https://drive.google.com/file/d/10oC1OWsaYFRc19-bHze9jhSeStH214wR/view?usp=drivesdk"
+        "url": "https://drive.google.com/file/d/10oC1OWsaYFRc19-bHze9jhSeStH214wR/view?usp=drivesdk",
         "type": "pdf"
       },
       {
         "label": "해설 영상",
-        "url": "https://www.youtube.com/watch?v=-w-wYc9d5j8&",
+        "url": "https://www.youtube.com/watch?v=-w-wYc9d5j8",
         "type": "video"
       },
       {
