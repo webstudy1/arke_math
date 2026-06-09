@@ -666,7 +666,7 @@ function renderLinks(links, prominent = false) {
   }
 
   const linkItems = links
-    .filter((link) => link && link.label && link.url)
+    .filter((link) => link && link.label && link.url && isLinkAvailable(link))
     .map((link) => {
       const typeLabel = linkTypeLabels[link.type] || linkTypeLabels.other;
       const className = prominent ? "link-chip link-chip-prominent" : "link-chip";
@@ -685,6 +685,20 @@ function renderLinks(links, prominent = false) {
   }
 
   return `<div class="links">${linkItems}</div>`;
+}
+
+function isLinkAvailable(link) {
+  if (!link.availableFrom) {
+    return true;
+  }
+
+  const availableAt = new Date(link.availableFrom);
+
+  if (Number.isNaN(availableAt.getTime())) {
+    return true;
+  }
+
+  return Date.now() >= availableAt.getTime();
 }
 
 function renderCutoffs(cutoffs) {

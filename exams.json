@@ -44,18 +44,25 @@
     ],
     "links": [
       {
-        "label": "문답지",
-        "url": "",
-        "type": "answer"
-      },
-      {
         "label": "총평",
-        "url": "",
+        "url": "https://drive.google.com/file/d/1x7H-7pEOzZQiyFrf1vn8VFCmf7MaX9ak/view?usp=sharing",
         "type": "pdf"
       },
       {
+        "label": "문제지",
+        "url": "https://drive.google.com/file/d/1_UtEHRPS9p3-d3pqNVuzqr7m98HFEiMc/view?usp=sharing",
+        "type": "answer",
+        "availableFrom": "2026-06-10T00:00:00+09:00"
+      },
+      {
+        "label": "정답지",
+        "url": "https://drive.google.com/file/d/1hFtHD_51li_VWex2eFixgHuSbQ7oMXJX/view?usp=sharing",
+        "type": "answer",
+        "availableFrom": "2026-06-10T00:00:00+09:00"
+      },
+      {
         "label": "손풀이",
-        "url": "",
+        "url": "https://drive.google.com/file/d/1yHhwYk8JJJvseiF6t3_HJF4EGgesBSLJ/view?usp=sharing",
         "type": "solution"
       }
     ],
@@ -64,7 +71,7 @@
       "PDF 원문 등급컷: 1컷 79~83점(표준점수 134), 2컷 69~75점(표준점수 126), 3컷 60~66점(표준점수 119).",
       "PDF 원문 만점 표준점수는 151점, 예상 만점자 수는 약 150명입니다.",
       "백분위 표는 PDF의 원점수-표준점수-백분위 표를 따르되, 1컷은 96, 2컷은 89, 3컷은 77 백분위로 보정한 값입니다.",
-      "문답지, 총평, 손풀이 링크는 추후 제공될 예정입니다."
+      "문제지와 정답지는 한국시간 2026년 6월 10일 00시 이후 공개됩니다."
     ]
   },
   {
