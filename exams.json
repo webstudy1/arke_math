@@ -1,5 +1,65 @@
 [
   {
+    "id": "arke-2027-september-calculus",
+    "name": "아르케 2027학년도 9월 모의고사(6.9일 배포) - 미적분",
+    "description": "2027학년도 9월 모의고사 미적분 선택자 기준 예상 계산 데이터입니다.",
+    "subject": "수학",
+    "commonMax": 74,
+    "electiveMax": 26,
+    "electiveName": "미적분",
+    "formula": {
+      "a": 0.805,
+      "b": 0.982,
+      "c": 65.7,
+      "display": "S ≈ 0.805X + 0.982Y + 65.7"
+    },
+    "cutoffs": {
+      "1": 134,
+      "2": 126,
+      "3": 119
+    },
+    "percentileTable": [
+      { "standardScore": 151, "percentile": 100 },
+      { "standardScore": 148, "percentile": 100 },
+      { "standardScore": 147, "percentile": 100 },
+      { "standardScore": 144, "percentile": 100 },
+      { "standardScore": 143, "percentile": 100 },
+      { "standardScore": 140, "percentile": 99 },
+      { "standardScore": 139, "percentile": 99 },
+      { "standardScore": 136, "percentile": 98 },
+      { "standardScore": 135, "percentile": 98 },
+      { "standardScore": 132, "percentile": 96 },
+      { "standardScore": 131, "percentile": 94 },
+      { "standardScore": 128, "percentile": 93 },
+      { "standardScore": 127, "percentile": 91 },
+      { "standardScore": 124, "percentile": 87 }
+    ],
+    "links": [
+      {
+        "label": "문답지",
+        "url": "",
+        "type": "answer"
+      },
+      {
+        "label": "총평",
+        "url": "",
+        "type": "pdf"
+      },
+      {
+        "label": "손풀이",
+        "url": "",
+        "type": "solution"
+      }
+    ],
+    "notices": [
+      "본 표준점수 환산식은 총평 PDF의 예상 환산식 기준입니다.",
+      "PDF 원문 등급컷: 1컷 79~83점(표준점수 134), 2컷 69~75점(표준점수 126), 3컷 60~66점(표준점수 119).",
+      "PDF 원문 만점 표준점수는 151점, 예상 만점자 수는 약 150명입니다.",
+      "백분위 표는 PDF의 원점수-표준점수-백분위 표에서 계산기에 맞는 대표 표준점수와 백분위 하한값으로 옮긴 값입니다.",
+      "문답지, 총평, 손풀이 링크는 추후 제공될 예정입니다."
+    ]
+  },
+  {
     "id": "arke-2027-june-calculus",
     "name": "아르케 2027학년도 6월 모의고사 - 미적분",
     "description": "2027학년도 6월 모의고사 미적분 선택자 기준 예상 계산 데이터입니다.",
