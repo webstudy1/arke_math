@@ -22,17 +22,25 @@
       { "standardScore": 151, "percentile": 100 },
       { "standardScore": 148, "percentile": 100 },
       { "standardScore": 147, "percentile": 100 },
+      { "standardScore": 145, "percentile": 100 },
       { "standardScore": 144, "percentile": 100 },
       { "standardScore": 143, "percentile": 100 },
+      { "standardScore": 142, "percentile": 99 },
+      { "standardScore": 141, "percentile": 99 },
       { "standardScore": 140, "percentile": 99 },
       { "standardScore": 139, "percentile": 99 },
-      { "standardScore": 136, "percentile": 98 },
-      { "standardScore": 135, "percentile": 98 },
-      { "standardScore": 132, "percentile": 96 },
+      { "standardScore": 138, "percentile": 98 },
+      { "standardScore": 137, "percentile": 98 },
+      { "standardScore": 136, "percentile": 97 },
+      { "standardScore": 135, "percentile": 96 },
+      { "standardScore": 134, "percentile": 96 },
+      { "standardScore": 132, "percentile": 95 },
       { "standardScore": 131, "percentile": 94 },
-      { "standardScore": 128, "percentile": 93 },
+      { "standardScore": 128, "percentile": 92 },
       { "standardScore": 127, "percentile": 91 },
-      { "standardScore": 124, "percentile": 87 }
+      { "standardScore": 126, "percentile": 89 },
+      { "standardScore": 124, "percentile": 87 },
+      { "standardScore": 119, "percentile": 77 }
     ],
     "links": [
       {
@@ -55,7 +63,7 @@
       "본 표준점수 환산식은 총평 PDF의 예상 환산식 기준입니다.",
       "PDF 원문 등급컷: 1컷 79~83점(표준점수 134), 2컷 69~75점(표준점수 126), 3컷 60~66점(표준점수 119).",
       "PDF 원문 만점 표준점수는 151점, 예상 만점자 수는 약 150명입니다.",
-      "백분위 표는 PDF의 원점수-표준점수-백분위 표에서 계산기에 맞는 대표 표준점수와 백분위 하한값으로 옮긴 값입니다.",
+      "백분위 표는 PDF의 원점수-표준점수-백분위 표를 따르되, 1컷은 96, 2컷은 89, 3컷은 77 백분위로 보정한 값입니다.",
       "문답지, 총평, 손풀이 링크는 추후 제공될 예정입니다."
     ]
   },
