@@ -184,7 +184,7 @@ function handleSubmit(event) {
   const standardScore = calculateStandardScore(commonScore, electiveScore, exam);
   const zeroRawStandardScore = calculateStandardScore(0, 0, exam);
   const percentile = interpolatePercentile(standardScore, exam.percentileTable, zeroRawStandardScore);
-  const grade = getGrade(standardScore, exam.cutoffs);
+  const grade = getGrade(standardScore, percentile, exam.cutoffs);
 
   renderResult({
     exam,
@@ -258,7 +258,7 @@ function calculateStandardScore(commonScore, electiveScore, exam) {
   return Math.round(score);
 }
 
-function getGrade(standardScore, cutoffs) {
+function getGrade(standardScore, percentile, cutoffs) {
   if (standardScore >= Number(cutoffs["1"])) {
     return "1등급";
   }
@@ -271,7 +271,37 @@ function getGrade(standardScore, cutoffs) {
     return "3등급";
   }
 
-  return "3등급 미만";
+  return getLowerGradeByPercentile(percentile);
+}
+
+function getLowerGradeByPercentile(percentile) {
+  const value = Number(percentile);
+
+  if (!Number.isFinite(value)) {
+    return "등급 산출 불가";
+  }
+
+  if (value >= 60) {
+    return "4등급";
+  }
+
+  if (value >= 40) {
+    return "5등급";
+  }
+
+  if (value >= 23) {
+    return "6등급";
+  }
+
+  if (value >= 11) {
+    return "7등급";
+  }
+
+  if (value >= 4) {
+    return "8등급";
+  }
+
+  return "9등급";
 }
 
 function interpolatePercentile(standardScore, percentileTable, zeroRawStandardScore = 0) {
