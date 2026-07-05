@@ -1,5 +1,114 @@
 [
   {
+    "id": "arke-2027-suneung-calculus",
+    "name": "2027 수능 모의고사",
+    "description": "2027 수능 모의고사 미적분 선택자 기준 예상 계산 데이터입니다.",
+    "subject": "수학",
+    "commonMax": 74,
+    "electiveMax": 26,
+    "electiveName": "미적분",
+    "formula": {
+      "a": 0.735,
+      "b": 0.880,
+      "c": 63.7,
+      "display": "S ≈ 0.735X + 0.880Y + 63.7"
+    },
+    "cutoffs": {
+      "1": 128,
+      "2": 121,
+      "3": 115
+    },
+    "percentileTable": [
+      { "standardScore": 141, "percentile": 100 },
+      { "standardScore": 139, "percentile": 100 },
+      { "standardScore": 138, "percentile": 100 },
+      { "standardScore": 137, "percentile": 100 },
+      { "standardScore": 136, "percentile": 100 },
+      { "standardScore": 135, "percentile": 99 },
+      { "standardScore": 134, "percentile": 99 },
+      { "standardScore": 133, "percentile": 99 },
+      { "standardScore": 132, "percentile": 98 },
+      { "standardScore": 131, "percentile": 98 },
+      { "standardScore": 130, "percentile": 98 },
+      { "standardScore": 129, "percentile": 97 },
+      { "standardScore": 128, "percentile": 96 },
+      { "standardScore": 127, "percentile": 95 },
+      { "standardScore": 126, "percentile": 94 },
+      { "standardScore": 125, "percentile": 93 },
+      { "standardScore": 124, "percentile": 92 },
+      { "standardScore": 123, "percentile": 91 },
+      { "standardScore": 122, "percentile": 90 },
+      { "standardScore": 121, "percentile": 89 },
+      { "standardScore": 120, "percentile": 86 },
+      { "standardScore": 119, "percentile": 84 },
+      { "standardScore": 118, "percentile": 82 },
+      { "standardScore": 117, "percentile": 80 },
+      { "standardScore": 115, "percentile": 77 }
+    ],
+    "links": [],
+    "notices": [
+      "본 표준점수 환산식은 총평 PDF의 예상 환산식 기준입니다.",
+      "PDF 원문 등급컷: 1컷 83~85점(표준점수 128), 2컷 75~77점(표준점수 121), 3컷 67~70점(표준점수 115).",
+      "PDF 원문 만점 표준점수는 141점, 예상 만점자 수는 약 1000명입니다.",
+      "백분위 표는 PDF의 원점수-표준점수-백분위 표를 기준으로 계산기에 맞게 옮긴 값입니다.",
+      "관련 링크는 아직 등록되지 않았습니다."
+    ]
+  },
+  {
+    "id": "arke-2027-suneung-probability",
+    "name": "2027 수능 모의고사 - 확률과 통계",
+    "description": "2027 수능 모의고사 확률과 통계 선택자 기준 예상 계산 데이터입니다.",
+    "subject": "수학",
+    "commonMax": 74,
+    "electiveMax": 26,
+    "electiveName": "확률과 통계",
+    "formula": {
+      "a": 0.735,
+      "b": 0.870,
+      "c": 60.76,
+      "display": "S ≈ 0.735X + 0.870Y + 60.76"
+    },
+    "cutoffs": {
+      "1": 128,
+      "2": 121,
+      "3": 115
+    },
+    "percentileTable": [
+      { "standardScore": 141, "percentile": 100 },
+      { "standardScore": 139, "percentile": 100 },
+      { "standardScore": 138, "percentile": 100 },
+      { "standardScore": 137, "percentile": 100 },
+      { "standardScore": 136, "percentile": 100 },
+      { "standardScore": 135, "percentile": 99 },
+      { "standardScore": 134, "percentile": 99 },
+      { "standardScore": 133, "percentile": 99 },
+      { "standardScore": 132, "percentile": 98 },
+      { "standardScore": 131, "percentile": 98 },
+      { "standardScore": 130, "percentile": 98 },
+      { "standardScore": 129, "percentile": 97 },
+      { "standardScore": 128, "percentile": 96 },
+      { "standardScore": 127, "percentile": 95 },
+      { "standardScore": 126, "percentile": 94 },
+      { "standardScore": 125, "percentile": 93 },
+      { "standardScore": 124, "percentile": 92 },
+      { "standardScore": 123, "percentile": 91 },
+      { "standardScore": 122, "percentile": 90 },
+      { "standardScore": 121, "percentile": 89 },
+      { "standardScore": 120, "percentile": 86 },
+      { "standardScore": 119, "percentile": 84 },
+      { "standardScore": 118, "percentile": 82 },
+      { "standardScore": 117, "percentile": 80 },
+      { "standardScore": 115, "percentile": 77 }
+    ],
+    "links": [],
+    "notices": [
+      "본 표준점수 환산식은 총평 PDF의 확률과 통계 예상 환산식 기준입니다.",
+      "확률과 통계 환산식: S ≈ 0.735X + 0.870Y + 60.76.",
+      "표준점수 등급컷과 백분위 표는 같은 수학 시험의 표준점수 기준표를 사용합니다.",
+      "관련 링크는 아직 등록되지 않았습니다."
+    ]
+  },
+  {
     "id": "arke-2027-september-calculus",
     "name": "아르케 2027학년도 9월 모의고사(6.9일 배포) - 미적분",
     "description": "2027학년도 9월 모의고사 미적분 선택자 기준 예상 계산 데이터입니다.",
