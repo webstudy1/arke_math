@@ -45,7 +45,13 @@
       { "standardScore": 117, "percentile": 80 },
       { "standardScore": 115, "percentile": 77 }
     ],
-    "links": [],
+    "links": [
+      {
+        "label": "문제지+빠답+총평",
+        "url": "https://drive.google.com/file/d/1WOuyr_pxmXiEyMwSo_XgwvIiqmn4BrRs/view?usp=sharing",
+        "type": "pdf"
+      }
+    ],
     "notices": [
       "본 표준점수 환산식은 총평 PDF의 예상 환산식 기준입니다.",
       "PDF 원문 등급컷: 1컷 83~85점(표준점수 128), 2컷 75~77점(표준점수 121), 3컷 67~70점(표준점수 115).",
@@ -100,7 +106,13 @@
       { "standardScore": 117, "percentile": 80 },
       { "standardScore": 115, "percentile": 77 }
     ],
-    "links": [],
+    "links": [
+      {
+        "label": "문제지+빠답+총평",
+        "url": "https://drive.google.com/file/d/1WOuyr_pxmXiEyMwSo_XgwvIiqmn4BrRs/view?usp=sharing",
+        "type": "pdf"
+      }
+    ],
     "notices": [
       "본 표준점수 환산식은 총평 PDF의 확률과 통계 예상 환산식 기준입니다.",
       "확률과 통계 환산식: S ≈ 0.735X + 0.870Y + 60.76.",
