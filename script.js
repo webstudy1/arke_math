@@ -182,8 +182,7 @@ function handleSubmit(event) {
 
   const rawScore = commonScore + electiveScore;
   const standardScore = calculateStandardScore(commonScore, electiveScore, exam);
-  const zeroRawStandardScore = calculateStandardScore(0, 0, exam);
-  const percentile = interpolatePercentile(standardScore, exam.percentileTable, zeroRawStandardScore);
+  const percentile = interpolatePercentile(standardScore, exam.percentileTable);
   const grade = getGrade(standardScore, percentile, exam.cutoffs);
 
   renderResult({
@@ -271,7 +270,21 @@ function getGrade(standardScore, percentile, cutoffs) {
     return "3등급";
   }
 
+  if (Number.isFinite(Number(cutoffs["4"]))) {
+    return getGradeByExtendedCutoffs(standardScore, cutoffs);
+  }
+
   return getLowerGradeByPercentile(percentile);
+}
+
+function getGradeByExtendedCutoffs(standardScore, cutoffs) {
+  for (const grade of ["4", "5", "6", "7", "8"]) {
+    if (standardScore >= Number(cutoffs[grade])) {
+      return `${grade}등급`;
+    }
+  }
+
+  return "9등급";
 }
 
 function getLowerGradeByPercentile(percentile) {
@@ -304,7 +317,7 @@ function getLowerGradeByPercentile(percentile) {
   return "9등급";
 }
 
-function interpolatePercentile(standardScore, percentileTable, zeroRawStandardScore = 0) {
+function interpolatePercentile(standardScore, percentileTable) {
   const sortedTable = percentileTable
     .map((row) => ({
       standardScore: Number(row.standardScore),
@@ -326,17 +339,11 @@ function interpolatePercentile(standardScore, percentileTable, zeroRawStandardSc
   }
 
   if (standardScore < lowest.standardScore) {
-    const baselineScore = Number(zeroRawStandardScore);
-
-    if (!Number.isFinite(baselineScore) || baselineScore >= lowest.standardScore) {
-      return standardScore <= lowest.standardScore ? 0 : clampPercentile(lowest.percentile);
-    }
-
-    if (standardScore <= baselineScore) {
+    if (standardScore <= 0) {
       return 0;
     }
 
-    const lowRatio = (standardScore - baselineScore) / (lowest.standardScore - baselineScore);
+    const lowRatio = standardScore / lowest.standardScore;
     const lowEstimate = lowRatio * lowest.percentile;
     return clampPercentile(lowEstimate);
   }
