@@ -1,5 +1,6 @@
 const examPaperSelect = document.getElementById("exam-paper-select");
 const examSelect = document.getElementById("exam-select");
+const calculatorCard = document.getElementById("calculator-card");
 const scoreForm = document.getElementById("score-form");
 const commonScoreInput = document.getElementById("common-score");
 const electiveScoreInput = document.getElementById("elective-score");
@@ -25,6 +26,7 @@ const historyContent = document.getElementById("history-content");
 const historyChart = document.getElementById("history-chart");
 const historyList = document.getElementById("history-list");
 const clearHistoryButton = document.getElementById("clear-history");
+const retryButton = document.getElementById("retry-button");
 
 let exams = [];
 const historyStorageKey = "arkeScoreHistory";
@@ -44,6 +46,7 @@ scoreForm.addEventListener("submit", handleSubmit);
 examSelect.addEventListener("change", handleExamChange);
 examPaperSelect.addEventListener("change", handleExamPaperChange);
 clearHistoryButton.addEventListener("click", clearHistory);
+retryButton.addEventListener("click", showCalculator);
 historyList.addEventListener("click", handleHistoryClick);
 window.addEventListener("resize", renderHistory);
 
@@ -58,6 +61,13 @@ function setMessage(text) {
 
 function hideResult() {
   resultCard.classList.add("hidden");
+}
+
+function showCalculator() {
+  hideResult();
+  calculatorCard.classList.remove("hidden");
+  setMessage("");
+  commonScoreInput.focus({ preventScroll: true });
 }
 
 async function loadExams() {
@@ -420,6 +430,7 @@ function renderResult(result) {
   resultGrade.textContent = result.grade;
   resultGradeText.textContent = result.grade;
   resultCutoffs.innerHTML = renderCutoffs(result.exam.cutoffs);
+  calculatorCard.classList.add("hidden");
   resultCard.classList.remove("hidden");
   saveHistory(result);
   renderHistory();
