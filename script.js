@@ -552,7 +552,7 @@ function drawHistoryChart(history) {
   };
   const chartWidth = displayWidth - padding.left - padding.right;
   const chartHeight = displayHeight - padding.top - padding.bottom;
-  const scores = history.map((item) => Number(item.standardScore));
+  const scores = history.map((item) => Number(item.rawScore));
   const minScore = Math.min(...scores);
   const maxScore = Math.max(...scores);
   const scoreRange = Math.max(1, maxScore - minScore);
@@ -600,7 +600,7 @@ function drawHistoryChart(history) {
 
   history.forEach((item, index) => {
     const x = getX(index);
-    const y = getY(Number(item.standardScore));
+    const y = getY(Number(item.rawScore));
 
     if (index === 0) {
       context.moveTo(x, y);
@@ -613,9 +613,9 @@ function drawHistoryChart(history) {
 
   history.forEach((item, index) => {
     const x = getX(index);
-    const y = getY(Number(item.standardScore));
+    const y = getY(Number(item.rawScore));
     const previous = history[index - 1];
-    const diff = previous ? Number(item.standardScore) - Number(previous.standardScore) : 0;
+    const diff = previous ? Number(item.rawScore) - Number(previous.rawScore) : 0;
 
     context.fillStyle = diff >= 0 ? "#16a34a" : "#dc2626";
     context.beginPath();
@@ -626,7 +626,7 @@ function drawHistoryChart(history) {
     context.font = "12px sans-serif";
     context.textAlign = "center";
     context.textBaseline = "bottom";
-    context.fillText(String(item.standardScore), x, y - 9);
+    context.fillText(String(item.rawScore), x, y - 9);
   });
 
   context.fillStyle = "#667085";
@@ -646,7 +646,7 @@ function renderHistoryList(history) {
 
   historyList.innerHTML = latestFirst.map((item, index) => {
     const previous = history[history.length - 2 - index];
-    const diff = previous ? Number(item.standardScore) - Number(previous.standardScore) : 0;
+    const diff = previous ? Number(item.rawScore) - Number(previous.rawScore) : 0;
     const diffText = previous ? formatDiff(diff) : "첫 기록";
     const diffClass = diff > 0 ? "up" : diff < 0 ? "down" : "same";
 
