@@ -535,3 +535,27 @@ h3 {
     border-left: 0;
   }
 }
+
+/* 2026 visual refresh */
+:root { --bg:#f3f1e9; --card:#fffefa; --text:#15201b; --muted:#66736d; --line:#d7ddd5; --primary:#1d5943; --primary-dark:#154533; --primary-soft:#edf5d8; --success-bg:#cbf36c; --shadow:0 20px 60px rgba(25,43,35,.09); }
+body { background-color:var(--bg); background-image:radial-gradient(rgba(88,105,96,.2) .7px,transparent .7px); background-size:18px 18px; color:var(--text); }
+.page { width:min(1080px,calc(100% - 40px)); padding-top:28px; }
+.hero { position:relative; min-height:330px; margin-bottom:18px; padding:74px 44px 44px; overflow:hidden; border-radius:28px; background:#1d5943; color:#fff; text-align:left; }
+.hero::before { content:"ARKE MATH  /  SCORE LAB"; position:absolute; top:28px; left:44px; color:#cbf36c; font-size:.72rem; font-weight:900; letter-spacing:.16em; }
+.hero::after { content:""; position:absolute; right:-85px; bottom:-190px; width:350px; height:350px; border:72px solid #cbf36c; border-radius:50%; }
+.hero .eyebrow { position:relative; z-index:1; color:#cfe1d8; }
+.hero h1 { position:relative; z-index:1; max-width:720px; font-size:clamp(2.4rem,5.5vw,4.3rem); line-height:1.12; letter-spacing:-.055em; }
+.card { padding:28px; border-radius:20px; background:var(--card); }
+.calculator-card { border-top:5px solid var(--primary); }
+.top-links-card { border-color:#cbd9a8; background:#e9efd7; }
+.field input,.field select { min-height:54px; border-radius:13px; background:#fafbf8; }
+.primary-button { min-height:56px; border-radius:13px; }
+.result-card { border-color:#17251f; background:#17251f; color:#fff; }
+.result-card .eyebrow,.result-card .result-item span,.result-card .cutoff-cell span { color:#b8c6bf; }
+.result-item { border-color:rgba(255,255,255,.14); border-radius:14px; background:rgba(255,255,255,.06); }
+.grade-badge { border-radius:14px; background:#cbf36c; color:#1d5943; }
+.cutoff-panel,.cutoff-table,.cutoff-cell + .cutoff-cell { border-color:rgba(255,255,255,.15); }
+.cutoff-cell { background:transparent; }
+.empty-state,.history-item,.info-box,.chart-wrap { border-radius:13px; }
+.link-chip { border-radius:12px; background:rgba(255,255,255,.65); color:var(--primary); }
+@media (max-width:760px) { .page{width:min(100% - 24px,1080px);padding-top:12px}.hero{min-height:360px;padding:88px 24px 36px}.hero::before{left:24px}.hero h1{font-size:clamp(2.15rem,11vw,3.2rem)} }

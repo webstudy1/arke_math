@@ -182,7 +182,7 @@ function handleSubmit(event) {
 
   const rawScore = commonScore + electiveScore;
   const standardScore = calculateStandardScore(commonScore, electiveScore, exam);
-  const percentile = interpolatePercentile(standardScore, exam.percentileTable);
+  const percentile = interpolatePercentile(standardScore, exam);
   const grade = getGrade(standardScore, percentile, exam.cutoffs);
 
   renderResult({
@@ -317,12 +317,15 @@ function getLowerGradeByPercentile(percentile) {
   return "9등급";
 }
 
-function interpolatePercentile(standardScore, percentileTable) {
+function interpolatePercentile(standardScore, exam) {
+  const percentileTable = exam.percentileTable;
+  const minimumStandardScore = calculateStandardScore(0, 0, exam);
   const sortedTable = percentileTable
     .map((row) => ({
       standardScore: Number(row.standardScore),
       percentile: Number(row.percentile)
     }))
+    .concat([{ standardScore: minimumStandardScore, percentile: 0 }])
     .sort((a, b) => a.standardScore - b.standardScore);
 
   const exactMatch = sortedTable.find((row) => row.standardScore === standardScore);
@@ -339,13 +342,7 @@ function interpolatePercentile(standardScore, percentileTable) {
   }
 
   if (standardScore < lowest.standardScore) {
-    if (standardScore <= 0) {
-      return 0;
-    }
-
-    const lowRatio = standardScore / lowest.standardScore;
-    const lowEstimate = lowRatio * lowest.percentile;
-    return clampPercentile(lowEstimate);
+    return 0;
   }
 
   for (let index = 0; index < sortedTable.length - 1; index += 1) {
