@@ -1,125 +1,93 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>모의고사 예상 표준점수·등급 계산기</title>
+  <meta name="description" content="아르케 수학 모의고사 예상 표준점수, 백분위, 등급 계산기">
+  <title>아르케 수학 성적 계산기</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main class="page">
-    <section class="hero">
-      <p class="eyebrow">수학 선택과목 예상 계산</p>
-      <h1>모의고사 예상 표준점수·등급 계산기</h1>
-    </section>
+  <header class="site-header">
+    <a class="brand" href="#">ARKE <span>MATH</span></a>
+    <span class="header-label">성적 계산기</span>
+  </header>
 
-    <section id="top-links-card" class="card top-links-card hidden" aria-live="polite">
-      <div class="card-header">
-        <div>
-          <p class="eyebrow">주요 자료</p>
-          <h2>총평·문제지·해설 영상</h2>
-          <p>선택한 시험의 PDF, 영상, 문제지/정답 링크입니다.</p>
-        </div>
-      </div>
-      <div id="top-links"></div>
+  <main class="page">
+    <section class="intro">
+      <p class="eyebrow">표준점수 · 백분위 · 등급</p>
+      <h1>모의고사 성적을 간편하게 확인하세요</h1>
+      <p>시험과 과목을 고르고 원점수만 입력하면 됩니다.</p>
     </section>
 
     <section class="card calculator-card" aria-labelledby="calculator-title">
-      <div class="card-header">
-        <div>
-          <h2 id="calculator-title">점수 입력</h2>
-          <p>시험 데이터를 선택하고 공통 점수와 선택과목 점수를 입력하세요.</p>
-        </div>
+      <div class="card-title-row">
+        <div><span class="step-badge">1</span><h2 id="calculator-title">시험 선택</h2></div>
+        <p>응시한 시험과 선택과목을 골라주세요.</p>
       </div>
 
       <form id="score-form" novalidate>
-        <label class="field">
-          <span>시험 선택</span>
-          <select id="exam-select" disabled>
-            <option value="">시험 데이터를 불러오는 중입니다</option>
-          </select>
-        </label>
-
-        <div class="input-grid">
+        <div class="selection-grid">
           <label class="field">
-            <span>공통 점수</span>
-            <input id="common-score" type="number" min="0" step="1" inputmode="numeric" placeholder="예: 62">
+            <span>시험지</span>
+            <select id="exam-paper-select" disabled><option value="">시험 데이터를 불러오는 중입니다</option></select>
           </label>
-
           <label class="field">
-            <span id="elective-score-label">선택과목 점수</span>
-            <input id="elective-score" type="number" min="0" step="1" inputmode="numeric" placeholder="예: 21">
+            <span>선택과목</span>
+            <select id="exam-select" disabled><option value="">시험지를 먼저 선택하세요</option></select>
           </label>
         </div>
 
-        <button class="primary-button" type="submit">계산하기</button>
+        <div class="divider"></div>
+        <div class="card-title-row compact">
+          <div><span class="step-badge">2</span><h2>원점수 입력</h2></div>
+          <p id="score-range-guide">시험과 과목을 선택하면 점수 범위가 표시됩니다.</p>
+        </div>
+        <div class="input-grid">
+          <label class="field score-field"><span>공통</span><div class="score-input"><input id="common-score" type="number" min="0" step="1" inputmode="numeric" autocomplete="off" placeholder="0"><b>점</b></div><small id="common-range">—</small></label>
+          <label class="field score-field"><span id="elective-score-label">선택과목</span><div class="score-input"><input id="elective-score" type="number" min="0" step="1" inputmode="numeric" autocomplete="off" placeholder="0"><b>점</b></div><small id="elective-range">—</small></label>
+        </div>
+        <button class="primary-button" type="submit">성적 계산하기 <span aria-hidden="true">→</span></button>
       </form>
-
       <p id="message" class="message" role="alert" aria-live="polite"></p>
     </section>
 
     <section id="result-card" class="card result-card hidden" aria-live="polite">
       <div class="result-heading">
-        <div>
-          <p class="eyebrow">계산 결과</p>
-          <h2 id="result-exam-name"></h2>
-        </div>
+        <div><p class="eyebrow">계산 결과</p><h2 id="result-exam-name"></h2></div>
         <div class="grade-badge" id="result-grade"></div>
       </div>
-
       <div class="result-grid">
-        <div class="result-item">
-          <span>원점수</span>
-          <strong id="result-raw-score"></strong>
-        </div>
-        <div class="result-item">
-          <span>예상 표준점수</span>
-          <strong id="result-standard-score"></strong>
-        </div>
-        <div class="result-item">
-          <span>예상 백분위</span>
-          <strong id="result-percentile"></strong>
-        </div>
-        <div class="result-item">
-          <span>예상 등급</span>
-          <strong id="result-grade-text"></strong>
-        </div>
+        <div class="result-item"><span>원점수</span><strong id="result-raw-score"></strong></div>
+        <div class="result-item primary-result"><span>예상 표준점수</span><strong id="result-standard-score"></strong></div>
+        <div class="result-item"><span>예상 백분위</span><strong id="result-percentile"></strong></div>
+        <div class="result-item"><span>예상 등급</span><strong id="result-grade-text"></strong></div>
       </div>
-
-      <div class="cutoff-panel">
-        <h3>1~3등급컷</h3>
-        <div id="result-cutoffs" class="cutoff-table"></div>
-      </div>
+      <div class="cutoff-panel"><h3>1~3등급 기준</h3><div id="result-cutoffs" class="cutoff-table"></div></div>
+      <p class="result-notice">예상 환산식과 백분위 대응표를 이용한 참고값입니다.</p>
     </section>
 
-    <section id="history-card" class="card history-card">
-      <div class="card-header history-header">
-        <div>
-          <p class="eyebrow">기록</p>
-          <h2>내 점수 기록</h2>
-          <p>계산한 결과는 이 브라우저의 기기 내 사이트 데이터에 저장됩니다.</p>
-        </div>
-        <button id="clear-history" class="secondary-button" type="button">기록 지우기</button>
-      </div>
-
-      <div id="history-empty" class="empty-state">아직 저장된 점수 기록이 없습니다.</div>
-
-      <div id="history-content" class="hidden">
-        <div class="chart-wrap">
-          <canvas id="history-chart" width="840" height="280" aria-label="표준점수 등락폭 그래프"></canvas>
-        </div>
-        <div id="history-list" class="history-list" aria-label="저장된 점수 기록"></div>
-      </div>
+    <section id="top-links-card" class="card top-links-card hidden" aria-live="polite">
+      <div class="simple-heading"><div><p class="eyebrow">시험 자료</p><h2>필요한 자료 바로가기</h2></div></div>
+      <div id="top-links"></div>
     </section>
 
-    <section id="exam-info" class="card info-card hidden" aria-live="polite"></section>
+    <details id="exam-details" class="card details-card">
+      <summary>선택한 시험의 상세 정보 보기</summary>
+      <section id="exam-info" class="info-card hidden" aria-live="polite"></section>
+    </details>
 
-    <footer class="footer">
-      <p>본 계산기는 사전 공개된 예상 변환식과 예상 등급컷을 바탕으로 한 비공식 계산기입니다. 실제 결과와 차이가 있을 수 있습니다.</p>
-      <p>예상 백분위는 입력된 표준점수-백분위 대응표를 바탕으로 선형보간하여 계산한 값입니다. 실제 백분위와 차이가 있을 수 있습니다.</p>
-    </footer>
+    <details id="history-card" class="card details-card history-card">
+      <summary>내 점수 기록 보기</summary>
+      <div class="history-body">
+        <div class="history-toolbar"><p>최근 계산 결과를 이 브라우저에 저장합니다.</p><button id="clear-history" class="secondary-button" type="button">전체 삭제</button></div>
+        <div id="history-empty" class="empty-state">아직 저장된 점수 기록이 없습니다.</div>
+        <div id="history-content" class="hidden"><div class="chart-wrap"><canvas id="history-chart" width="840" height="280" aria-label="표준점수 변화 그래프"></canvas></div><div id="history-list" class="history-list" aria-label="저장된 점수 기록"></div></div>
+      </div>
+    </details>
+
+    <footer class="footer"><strong>ARKE MATH</strong><p>실제 채점 결과와 차이가 있을 수 있습니다.</p></footer>
   </main>
-
   <script src="script.js"></script>
 </body>
 </html>

@@ -1,3 +1,4 @@
+const examPaperSelect = document.getElementById("exam-paper-select");
 const examSelect = document.getElementById("exam-select");
 const scoreForm = document.getElementById("score-form");
 const commonScoreInput = document.getElementById("common-score");
@@ -8,6 +9,9 @@ const examInfoEl = document.getElementById("exam-info");
 const resultCard = document.getElementById("result-card");
 const topLinksCard = document.getElementById("top-links-card");
 const topLinksEl = document.getElementById("top-links");
+const commonRange = document.getElementById("common-range");
+const electiveRange = document.getElementById("elective-range");
+const scoreRangeGuide = document.getElementById("score-range-guide");
 
 const resultExamName = document.getElementById("result-exam-name");
 const resultRawScore = document.getElementById("result-raw-score");
@@ -38,6 +42,7 @@ const linkTypeLabels = {
 document.addEventListener("DOMContentLoaded", init);
 scoreForm.addEventListener("submit", handleSubmit);
 examSelect.addEventListener("change", handleExamChange);
+examPaperSelect.addEventListener("change", handleExamPaperChange);
 clearHistoryButton.addEventListener("click", clearHistory);
 historyList.addEventListener("click", handleHistoryClick);
 window.addEventListener("resize", renderHistory);
@@ -70,20 +75,58 @@ async function loadExams() {
     }
 
     exams = data;
-    renderExamOptions(exams);
+    renderExamPaperOptions(exams);
     setMessage("");
   } catch (error) {
-    examSelect.innerHTML = '<option value="">시험 데이터를 불러올 수 없습니다</option>';
+    examPaperSelect.innerHTML = '<option value="">시험 데이터를 불러올 수 없습니다</option>';
+    examPaperSelect.disabled = true;
+    examSelect.innerHTML = '<option value="">과목을 불러올 수 없습니다</option>';
     examSelect.disabled = true;
     setMessage(error.message || "시험 데이터를 불러오지 못했습니다.");
   }
+}
+
+function getExamPaperKey(exam) {
+  return exam.id.replace(/-(calculus|probability)$/, "");
+}
+
+function getExamPaperName(exam) {
+  const electiveName = exam.electiveName || "";
+  const suffixPattern = new RegExp(`\\s*-\\s*${electiveName.replace(/[.*+?^${}()|[\\]\\]/g, "\\$&")}$`);
+  return exam.name.replace(suffixPattern, "");
+}
+
+function renderExamPaperOptions(examList) {
+  const papers = new Map();
+
+  examList.forEach((exam) => {
+    const key = getExamPaperKey(exam);
+    if (!papers.has(key)) {
+      papers.set(key, getExamPaperName(exam));
+    }
+  });
+
+  examPaperSelect.innerHTML = "";
+  papers.forEach((name, key) => {
+    const option = document.createElement("option");
+    option.value = key;
+    option.textContent = name;
+    examPaperSelect.appendChild(option);
+  });
+  examPaperSelect.disabled = papers.size === 0;
+  handleExamPaperChange();
+}
+
+function handleExamPaperChange() {
+  const matchingExams = exams.filter((exam) => getExamPaperKey(exam) === examPaperSelect.value);
+  renderExamOptions(matchingExams);
 }
 
 function renderExamOptions(examList) {
   examSelect.innerHTML = "";
 
   if (examList.length === 0) {
-    examSelect.innerHTML = '<option value="">등록된 시험이 없습니다</option>';
+    examSelect.innerHTML = '<option value="">선택 가능한 과목이 없습니다</option>';
     examSelect.disabled = true;
     return;
   }
@@ -91,7 +134,7 @@ function renderExamOptions(examList) {
   examList.forEach((exam) => {
     const option = document.createElement("option");
     option.value = exam.id;
-    option.textContent = exam.name || exam.id;
+    option.textContent = exam.electiveName || exam.name || exam.id;
     examSelect.appendChild(option);
   });
 
@@ -109,6 +152,9 @@ function handleExamChange() {
     examInfoEl.classList.add("hidden");
     topLinksCard.classList.add("hidden");
     electiveScoreLabel.textContent = "선택과목 점수";
+    commonRange.textContent = "—";
+    electiveRange.textContent = "—";
+    scoreRangeGuide.textContent = "시험과 과목을 선택하면 점수 범위가 표시됩니다.";
     return;
   }
 
@@ -117,6 +163,9 @@ function handleExamChange() {
   electiveScoreInput.placeholder = `0~${exam.electiveMax}`;
   commonScoreInput.max = exam.commonMax;
   electiveScoreInput.max = exam.electiveMax;
+  commonRange.textContent = `0~${exam.commonMax}점`;
+  electiveRange.textContent = `0~${exam.electiveMax}점`;
+  scoreRangeGuide.textContent = `공통 ${exam.commonMax}점 · ${exam.electiveName} ${exam.electiveMax}점 만점`;
   renderTopLinks(exam.links);
   renderExamInfo(exam);
 }
