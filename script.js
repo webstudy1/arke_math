@@ -117,7 +117,13 @@ function renderExamPaperOptions(examList) {
   });
 
   examPaperSelect.innerHTML = "";
-  papers.forEach((name, key) => {
+  const orderedPapers = [...papers.entries()].sort(([keyA], [keyB]) => {
+    const priorityA = keyA === "arke-2027-suneung-2" ? 0 : 1;
+    const priorityB = keyB === "arke-2027-suneung-2" ? 0 : 1;
+    return priorityA - priorityB;
+  });
+
+  orderedPapers.forEach(([key, name]) => {
     const option = document.createElement("option");
     option.value = key;
     option.textContent = name;
