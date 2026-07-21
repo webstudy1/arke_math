@@ -97,7 +97,7 @@ async function loadExams() {
 }
 
 function getExamPaperKey(exam) {
-  return exam.id.replace(/-(calculus|probability)$/, "");
+  return exam.id.replace(/-(calculus|probability|geometry)$/, "");
 }
 
 function getExamPaperName(exam) {
