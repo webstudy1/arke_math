@@ -307,7 +307,13 @@
       { "standardScore": 72, "percentile": 11 },
       { "standardScore": 67, "percentile": 4 }
     ],
-    "links": [],
+    "links": [
+      {
+        "label": "합본",
+        "url": "https://orbi.kr/00079001504",
+        "type": "pdf"
+      }
+    ],
     "notices": [
       "본 표준점수 환산식은 ARKE 수능 2회차 총평 PDF의 예상 환산식 기준입니다.",
       "PDF 원문 등급컷: 1컷 86~87점(표준점수 129), 2컷 77~78점(표준점수 122), 3컷 68~69점(표준점수 115).",
@@ -366,7 +372,13 @@
       { "standardScore": 72, "percentile": 11 },
       { "standardScore": 67, "percentile": 4 }
     ],
-    "links": [],
+    "links": [
+      {
+        "label": "합본",
+        "url": "https://orbi.kr/00079001504",
+        "type": "pdf"
+      }
+    ],
     "notices": [
       "본 표준점수 환산식은 ARKE 수능 2회차 총평 PDF의 예상 환산식 기준입니다.",
       "PDF 원문 등급컷: 1컷 83~85점(표준점수 129), 2컷 74~76점(표준점수 122), 3컷 65~67점(표준점수 115).",
@@ -425,7 +437,13 @@
       { "standardScore": 72, "percentile": 11 },
       { "standardScore": 67, "percentile": 4 }
     ],
-    "links": [],
+    "links": [
+      {
+        "label": "합본",
+        "url": "https://orbi.kr/00079001504",
+        "type": "pdf"
+      }
+    ],
     "notices": [
       "본 표준점수 환산식은 ARKE 수능 2회차 총평 PDF의 예상 환산식 기준입니다.",
       "PDF 원문 등급컷: 1컷 87~88점(표준점수 129), 2컷 78~79점(표준점수 122), 3컷 69~70점(표준점수 115).",
