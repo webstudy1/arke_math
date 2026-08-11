@@ -453,6 +453,61 @@
     ]
   },
   {
+    "id": "arke-2027-september-2-calculus",
+    "name": "ARKE 2027학년도 9월 2회차 모의고사 - 미적분",
+    "description": "ARKE 9월 2회차 모의고사 미적분 선택자 기준 예상 계산 데이터입니다.",
+    "subject": "수학",
+    "commonMax": 74,
+    "electiveMax": 26,
+    "electiveName": "미적분",
+    "formula": {
+      "a": 0.680,
+      "b": 0.710,
+      "c": 65.70,
+      "display": "S ≈ 0.680X + 0.710Y + 65.70"
+    },
+    "cutoffs": {
+      "1": 126,
+      "2": 121,
+      "3": 115,
+      "4": 110,
+      "5": 94,
+      "6": 84,
+      "7": 78,
+      "8": 73
+    },
+    "percentileTable": [
+      { "standardScore": 134, "percentile": 100 },
+      { "standardScore": 132, "percentile": 100 },
+      { "standardScore": 130, "percentile": 99 },
+      { "standardScore": 129, "percentile": 99 },
+      { "standardScore": 127, "percentile": 98 },
+      { "standardScore": 126, "percentile": 97 },
+      { "standardScore": 124, "percentile": 95 },
+      { "standardScore": 123, "percentile": 92 },
+      { "standardScore": 122, "percentile": 92 },
+      { "standardScore": 121, "percentile": 90 },
+      { "standardScore": 120, "percentile": 88 },
+      { "standardScore": 119, "percentile": 87 },
+      { "standardScore": 118, "percentile": 85 },
+      { "standardScore": 117, "percentile": 81 },
+      { "standardScore": 115, "percentile": 78 },
+      { "standardScore": 110, "percentile": 60 },
+      { "standardScore": 94, "percentile": 40 },
+      { "standardScore": 84, "percentile": 23 },
+      { "standardScore": 78, "percentile": 11 },
+      { "standardScore": 73, "percentile": 4 }
+    ],
+    "links": [],
+    "notices": [
+      "본 표준점수 환산식은 ARKE 9월 2회차 총평 PDF의 예상 환산식 기준입니다.",
+      "PDF 원문 등급컷: 1컷 88점(표준점수 126), 2컷 80~81점(표준점수 121), 3컷 72~73점(표준점수 115).",
+      "PDF 원문 미적분 만점 표준점수는 134점이며, 예상 만점자는 1,200명, 만점자 비율은 약 0.25%입니다.",
+      "백분위 표는 PDF의 미적분 원점수-표준점수-백분위 범위를 계산기에 맞게 대응한 값입니다.",
+      "PDF에는 미적분 데이터만 수록되어 있습니다."
+    ]
+  },
+  {
     "id": "arke-2027-september-calculus",
     "name": "아르케 2027학년도 9월 모의고사(6.9일 배포) - 미적분",
     "description": "2027학년도 9월 모의고사 미적분 선택자 기준 예상 계산 데이터입니다.",

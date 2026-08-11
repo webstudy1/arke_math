@@ -119,11 +119,12 @@ function renderExamPaperOptions(examList) {
   examPaperSelect.innerHTML = "";
   const orderedPapers = [...papers.entries()].sort(([keyA], [keyB]) => {
     const paperPriorities = {
-      "arke-2027-suneung-3": 0,
-      "arke-2027-suneung-2": 1
+      "arke-2027-september-2": 0,
+      "arke-2027-suneung-3": 1,
+      "arke-2027-suneung-2": 2
     };
-    const priorityA = paperPriorities[keyA] ?? 2;
-    const priorityB = paperPriorities[keyB] ?? 2;
+    const priorityA = paperPriorities[keyA] ?? 3;
+    const priorityB = paperPriorities[keyB] ?? 3;
     return priorityA - priorityB;
   });
 
