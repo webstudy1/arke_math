@@ -1,5 +1,64 @@
 [
   {
+    "id": "arke-2027-suneung-5-calculus",
+    "name": "ARKE 5회차 - 미적분",
+    "description": "ARKE 5회차 모의고사 미적분 선택자 기준 예상 계산 데이터입니다.",
+    "subject": "수학",
+    "commonMax": 74,
+    "electiveMax": 26,
+    "electiveName": "미적분",
+    "formula": {
+      "a": 0.820,
+      "b": 0.865,
+      "c": 63.83,
+      "display": "S ≈ 0.820X + 0.865Y + 63.83"
+    },
+    "cutoffs": {
+      "1": 131,
+      "2": 122,
+      "3": 115,
+      "4": 107,
+      "5": 97,
+      "6": 89,
+      "7": 82,
+      "8": 75
+    },
+    "percentileTable": [
+      { "standardScore": 147, "percentile": 100 },
+      { "standardScore": 145, "percentile": 100 },
+      { "standardScore": 144, "percentile": 100 },
+      { "standardScore": 142, "percentile": 99 },
+      { "standardScore": 141, "percentile": 99 },
+      { "standardScore": 140, "percentile": 99 },
+      { "standardScore": 138, "percentile": 98 },
+      { "standardScore": 137, "percentile": 98 },
+      { "standardScore": 136, "percentile": 97 },
+      { "standardScore": 134, "percentile": 96 },
+      { "standardScore": 133, "percentile": 95 },
+      { "standardScore": 131, "percentile": 92 },
+      { "standardScore": 130, "percentile": 91 },
+      { "standardScore": 128, "percentile": 89 },
+      { "standardScore": 127, "percentile": 88 },
+      { "standardScore": 126, "percentile": 86 },
+      { "standardScore": 124, "percentile": 84 },
+      { "standardScore": 123, "percentile": 80 },
+      { "standardScore": 115, "percentile": 77 },
+      { "standardScore": 107, "percentile": 60 },
+      { "standardScore": 97, "percentile": 40 },
+      { "standardScore": 89, "percentile": 23 },
+      { "standardScore": 82, "percentile": 11 },
+      { "standardScore": 75, "percentile": 4 }
+    ],
+    "links": [],
+    "notices": [
+      "표준점수 환산식은 만점 표준점수가 147점이 되도록 조정한 값입니다.",
+      "예상 등급컷: 1컷 약 80점(표준점수 131), 2컷 76점(표준점수 122), 3컷 68~69점(표준점수 115).",
+      "미적분 만점 표준점수는 147점입니다.",
+      "백분위 표는 조정된 환산식을 기준으로 구성했으며, 2~9등급 컷은 PDF의 표를 그대로 적용했습니다.",
+      "원문 시험명은 ARKE 수능 Finale 1회차이며, 계산기에는 ARKE 5회차로 표시합니다."
+    ]
+  },
+  {
     "id": "arke-2027-suneung-4-calculus",
     "name": "ARKE 2027학년도 수능 4회 모의고사 - 미적분",
     "description": "ARKE 수능 4회 모의고사 미적분 선택자 기준 예상 계산 데이터입니다.",
